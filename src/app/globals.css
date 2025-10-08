@@ -1,0 +1,21 @@
+/* Importa todas as classes utilitárias do Tailwind CSS */
+@import "tailwindcss";
+
+/* 
+  Definição de cores customizadas para Tailwind CSS v4
+  Usar prefixo --color- para que o Tailwind reconheça como cores
+*/
+@theme {
+  --color-main-color-zinc: #d9d9d9; /* Cinza claro para backgrounds */
+  --color-dark-blue-color: #001830; /* Azul escuro para headers */
+  --color-main-orange-color: #ff6600; /* Laranja para destaques */
+}
+
+/* 
+  Como usar estas cores no código:
+  - bg-main-color-zinc     → background cinza
+  - bg-dark-blue-color     → background azul escuro  
+  - bg-main-orange-color   → background laranja
+  - text-main-orange-color → texto laranja
+  - border-dark-blue-color → borda azul escura
+*/
