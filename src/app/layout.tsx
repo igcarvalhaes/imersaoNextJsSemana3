@@ -15,7 +15,7 @@ const poppins = Poppins({
 
 // Metadados da aplicação (SEO)
 export const metadata: Metadata = {
-  title: "IMERSÃO NEXT.JS",
+  title: "Imersão Next.js - SerraJr",
   description: "Projeto desenvolvido durante a Imersão Next.js da SerraJr",
 };
 

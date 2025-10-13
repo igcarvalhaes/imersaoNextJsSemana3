@@ -16,13 +16,23 @@ export function Header() {
         </div>
 
         {/* Menu de navegação */}
-        <ul className="flex space-x-10 md:gap-20">
+        <ul className="flex space-x-10 md:gap-10">
           <li>
             {/* Link do Next.js - otimizado para navegação SPA */}
             <Link href="/" className="hover:text-main-orange-color text-2xl">
               Home
             </Link>
           </li>
+
+          <li>
+            <Link
+              href="/login"
+              className="hover:text-main-orange-color text-2xl"
+            >
+              Entrar
+            </Link>
+          </li>
+
           <li>
             <Link
               href="/posts"
