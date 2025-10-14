@@ -98,7 +98,7 @@ export default function SignInPage() {
           </form>
         </div>
 
-        <div className="w-full h-full flex items-center bg-main-orange-color rounded-xl p-8">
+        <div className="w-full h-full hidden md:flex items-center bg-main-orange-color rounded-xl p-8">
           <Image
             src="/images/logos/serracadastro.png"
             alt="login-image"
