@@ -1,15 +1,7 @@
 import PostForm from "@/components/PostForm";
 import DeleteButton from "@/components/DeleteButton";
 import { getPosts } from "@/lib/posts";
-
-type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { Post } from "@/types";
 
 export default async function Posts() {
   // Buscando os dados no servidor

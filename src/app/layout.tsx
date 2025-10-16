@@ -1,3 +1,4 @@
+import { SessionProvider } from "@/components/providers/sessionProvider";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; // Importa fonte do Google Fonts
 import "./globals.css";
@@ -30,14 +31,16 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased min-h-screen flex flex-col`}
       >
-        {/* Header fixo em todas as páginas */}
-        <Header />
+        <SessionProvider>
+          {/* Header fixo em todas as páginas */}
+          <Header />
 
-        {/* Main cresce para ocupar espaço disponível */}
-        <main className="flex-1 flex flex-col">{children}</main>
+          {/* Main cresce para ocupar espaço disponível */}
+          <main className="flex-1 flex flex-col">{children}</main>
 
-        {/* Footer sempre visível na base */}
-        <Footer />
+          {/* Footer sempre visível na base */}
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

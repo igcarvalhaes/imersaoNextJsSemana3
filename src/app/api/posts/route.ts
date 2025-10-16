@@ -1,14 +1,6 @@
 import { NextResponse } from "next/server"; // Importando NextResponse para manipular respostas
-
 import { prisma } from "@/lib/prisma";
-
-// Definindo o tipo de um Post para usar TypeScript
-type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
+import type { Post } from "@/types";
 
 export async function GET() {
   try {
@@ -43,7 +35,7 @@ export async function POST(request: Request) {
 
     const newPost = await prisma.post.create({
       data: {
-        userId: Number(userId),
+        userId: userId,
         title,
         body,
       },

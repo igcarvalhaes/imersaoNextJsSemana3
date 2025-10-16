@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"; // Importando useRouter para navega
 // Componente de formulário para criar um novo post
 
 export default function PostForm() {
-  //const [userId, setUserId] = useState("1");  Temporariamente fixo como "1"
+  const [userId, setUserId] = useState("1"); // ✅ String em vez de número
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -29,7 +29,7 @@ export default function PostForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: 1,
+          userId: userId,
           title,
           body,
         }),
@@ -39,7 +39,7 @@ export default function PostForm() {
       }
 
       // Limpa os campos do formulário
-      // setUserId(""); removido temporariamente
+      setUserId("1");
       setTitle("");
       setBody("");
       router.refresh(); // Atualiza a página para mostrar o novo post
