@@ -1,18 +1,16 @@
+// src/app/posts/page.tsx
 import PostForm from "@/components/PostForm";
 import DeleteButton from "@/components/DeleteButton";
 import { getPosts } from "@/lib/posts";
 import type { Post } from "@/types";
 
 export default async function Posts() {
-  // Buscando os dados no servidor
   const posts: Post[] = await getPosts();
 
   return (
     <div className="flex-1 h-screen bg-main-color-zinc flex flex-col items-center">
-      {/*Formulário para criar um novo post */}
       <PostForm />
 
-      {/*Server component para exibicao */}
       <div className="w-full flex flex-col items-center">
         {posts.length > 0 ? (
           posts.map((post) => (
@@ -23,9 +21,11 @@ export default async function Posts() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-500">
-                    ID Usuario:
+                    Autor:
                   </span>
-                  <h3 className="font-semibold text-gray-800">{post.userId}</h3>
+                  <h3 className="font-semibold text-gray-800">
+                    {post.user?.name || "Usuário desconhecido"}
+                  </h3>
                 </div>
 
                 <div>
@@ -36,8 +36,7 @@ export default async function Posts() {
                 </div>
 
                 <div className="pt-2 border-t border-gray-200">
-                  {/* Client Component para interatividade */}
-                  <DeleteButton postId={post.id} />
+                  <DeleteButton id={post.id} userId={post.userId} />
                 </div>
               </div>
             </div>

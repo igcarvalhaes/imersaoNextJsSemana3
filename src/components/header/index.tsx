@@ -1,30 +1,9 @@
-import Link from "next/link"; // Componente de navegação do Next.js
+// src/components/header/index.tsx
+import Link from "next/link";
 import { MobileMenuButton } from "./mobileMenuButton";
+import { AuthNav } from "./authNav";
 
-// Componente Header - reutilizável em todas as páginas
 export function Header() {
-  // Lista de links reutilizavel
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/login", label: "Entrar" },
-    { href: "/posts", label: "Posts" },
-  ];
-
-  const NavList = ({ className }: { className: string }) => (
-    <ul className={className}>
-      {navLinks.map((link) => (
-        <li key={link.href}>
-          <Link
-            href={link.href}
-            className="hover:text-main-orange-color text-2xl"
-          >
-            {link.label}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     <header className="w-full h-24 bg-dark-blue-color text-white relative">
       <nav className="h-full flex items-center justify-between mx-5 md:justify-evenly">
@@ -34,13 +13,13 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Componente client para mobile menu */}
+        {/* Mobile Menu */}
         <MobileMenuButton>
-          <NavList className="flex flex-col items-center space-y-6 py-8" />
+          <AuthNav isMobile />
         </MobileMenuButton>
 
-        {/* Menu desktop (sempre server component) */}
-        <NavList className="hidden md:flex space-x-10 md:gap-10" />
+        {/* Desktop Menu */}
+        <AuthNav />
       </nav>
     </header>
   );

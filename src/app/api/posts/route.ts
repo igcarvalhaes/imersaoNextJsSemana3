@@ -1,12 +1,22 @@
-import { NextResponse } from "next/server"; // Importando NextResponse para manipular respostas
+// src/app/api/posts/route.ts
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import type { Post } from "@/types";
 
 export async function GET() {
   try {
     const posts = await prisma.post.findMany({
       orderBy: {
         createdAt: "desc",
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
       },
     });
     return NextResponse.json(posts);
@@ -19,25 +29,38 @@ export async function GET() {
   }
 }
 
-//  POST - criar um novo Post
-
 export async function POST(request: Request) {
   try {
-    const { userId, title, body } = await request.json();
+    // ✅ Verifica se o usuário está autenticado
+    const session = await getServerSession(authOptions);
 
-    // Validação básica dos dados recebidos
-    if (!userId || !title || !body) {
+    if (!session?.user?.id) {
+      return NextResponse.json({ message: "Não autorizado" }, { status: 401 });
+    }
+
+    const { title, body } = await request.json();
+
+    if (!title || !body) {
       return NextResponse.json(
-        { message: "Todos os campos são obrigatórios" },
+        { message: "Título e conteúdo são obrigatórios" },
         { status: 400 }
       );
     }
 
+    // ✅ Usa o userId da sessão (mais seguro)
     const newPost = await prisma.post.create({
       data: {
-        userId: userId,
+        userId: session.user.id,
         title,
         body,
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
       },
     });
 
@@ -51,27 +74,47 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE - Deletar um post
-
 export async function DELETE(request: Request) {
   try {
+    // ✅ Verifica se o usuário está autenticado
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ message: "Não autorizado" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
     if (!id) {
       return NextResponse.json(
-        {
-          message: "ID do post é obrigatório",
-        },
-        {
-          status: 400,
-        }
+        { message: "ID do post é obrigatório" },
+        { status: 400 }
       );
     }
+
+    // ✅ Busca o post para verificar se pertence ao usuário
+    const post = await prisma.post.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!post) {
+      return NextResponse.json(
+        { message: "Post não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    // ✅ Verifica se o usuário é o dono do post
+    if (post.userId !== session.user.id) {
+      return NextResponse.json(
+        { message: "Você não tem permissão para deletar este post" },
+        { status: 403 }
+      );
+    }
+
     await prisma.post.delete({
-      where: {
-        id: Number(id),
-      },
+      where: { id: Number(id) },
     });
 
     return NextResponse.json({ message: "Post deletado com sucesso" });
