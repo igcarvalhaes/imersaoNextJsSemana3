@@ -1,4 +1,3 @@
-// src/app/posts/page.tsx
 import PostForm from "@/components/PostForm";
 import DeleteButton from "@/components/DeleteButton";
 import { getPosts } from "@/lib/posts";
