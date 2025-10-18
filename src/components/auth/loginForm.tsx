@@ -1,7 +1,7 @@
 // src/components/auth/loginForm.tsx
 "use client";
 
-import { Eye, Mail } from "lucide-react";
+import { Eye, EyeOff, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,6 +13,10 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Mostrar senha
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,14 +96,25 @@ export function LoginForm() {
         <div className="relative flex items-center">
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             className="w-full text-slate-900 text-sm border-b border-slate-300 focus:border-main-orange-color pl-2 pr-8 py-3 outline-none"
             placeholder="Digite a senha"
           />
-          <Eye className="w-[18px] h-[18px] absolute right-2 stroke-slate-300" />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 hover:opacity-70 transition-opacity"
+            aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+          >
+            {showPassword ? (
+              <EyeOff className="w-[18px] h-[18px] stroke-slate-300" />
+            ) : (
+              <Eye className="w-[18px] h-[18px] stroke-slate-300" />
+            )}
+          </button>
         </div>
       </div>
 

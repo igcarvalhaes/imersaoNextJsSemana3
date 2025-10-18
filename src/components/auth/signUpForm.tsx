@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Mail, User } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -11,6 +11,11 @@ export function SignUpForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Estados para mostrar/esconder senhas no form
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,7 +108,7 @@ export function SignUpForm() {
         <div className="relative flex items-center">
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -111,7 +116,18 @@ export function SignUpForm() {
             className="w-full text-slate-900 text-sm border-b border-slate-300 focus:border-main-orange-color pl-2 pr-8 py-3 outline-none"
             placeholder="Mínimo 6 caracteres"
           />
-          <Eye className="w-[18px] h-[18px] absolute right-2 stroke-slate-300" />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 hover:opacity-70 transition-opacity"
+            aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+          >
+            {showPassword ? (
+              <EyeOff className="w-[18px] h-[18px] stroke-slate-300" />
+            ) : (
+              <Eye className="w-[18px] h-[18px] stroke-slate-300" />
+            )}
+          </button>
         </div>
       </div>
 
@@ -122,7 +138,7 @@ export function SignUpForm() {
         <div className="relative flex items-center">
           <input
             name="confirmPassword"
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -130,7 +146,20 @@ export function SignUpForm() {
             className="w-full text-slate-900 text-sm border-b border-slate-300 focus:border-main-orange-color pl-2 pr-8 py-3 outline-none"
             placeholder="Digite a senha novamente"
           />
-          <Eye className="w-[18px] h-[18px] absolute right-2 stroke-slate-300" />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute right-2 hover:opacity-70 transition-opacity"
+            aria-label={
+              showConfirmPassword ? "Esconder senha" : "Mostrar senha"
+            }
+          >
+            {showConfirmPassword ? (
+              <EyeOff className="w-[18px] h-[18px] stroke-slate-300" />
+            ) : (
+              <Eye className="w-[18px] h-[18px] stroke-slate-300" />
+            )}
+          </button>
         </div>
       </div>
 
