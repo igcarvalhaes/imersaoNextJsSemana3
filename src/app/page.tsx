@@ -21,7 +21,7 @@ export default function Home() {
 
         {/* Botão - Mobile: w-full, Desktop: w-70 */}
         <Link
-          href="/cadastro"
+          href="/posts"
           className="inline-flex items-center justify-center w-full md:w-70 h-12 md:h-14 bg-main-orange-color text-white text-sm md:text-[15px] font-semibold rounded-md hover:bg-bright-orange-color transition-colors"
         >
           Comece a aprender
