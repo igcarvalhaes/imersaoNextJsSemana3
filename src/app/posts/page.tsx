@@ -7,7 +7,7 @@ export default async function Posts() {
   const posts: Post[] = await getPosts();
 
   return (
-    <div className="flex-1 h-screen bg-main-color-zinc flex flex-col items-center">
+    <div className="flex-1 h-screen bg-light-blue-zinc flex flex-col items-center">
       <PostForm />
 
       <div className="w-full flex flex-col items-center">
@@ -15,16 +15,16 @@ export default async function Posts() {
           posts.map((post) => (
             <div
               key={post.id}
-              className="w-full max-w-10/12 md:max-w-[1104px] mt-10 bg-white rounded-lg shadow-md p-6 mb-6"
+              className="w-full max-w-10/12  md:max-w-[627px] mt-10 bg-white rounded-lg shadow-md p-6 mb-6"
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-500">
                     Autor:
                   </span>
-                  <h3 className="font-semibold text-gray-800">
+                  <span className="font-semibold text-sm text-gray-800">
                     {post.user?.name || "Usuário desconhecido"}
-                  </h3>
+                  </span>
                 </div>
 
                 <div>

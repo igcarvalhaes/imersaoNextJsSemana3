@@ -6,19 +6,15 @@
   Usar prefixo --color- para que o Tailwind reconheça como cores
 */
 @theme {
-  --color-main-color-zinc: #d9d9d9; /* Cinza claro para backgrounds */
-  --color-dark-blue-color: #001830; /* Azul escuro para headers */
+  /* Cores principais (usadas) */
   --color-main-orange-color: #ff6600; /* Laranja para destaques */
   --color-bright-orange-color: #ff8533; /* Laranja para hover */
 
-  --color-dark-gray-blue: #20262f;
+  /* Tons de azul/cinza (usados) */
+  --color-dark-gray-blue: #20262f; /* Header e Footer */
+  --color-dark-gray-blue-zinc: #1e2024; /* Background Home */
+  --color-light-gray: #707075; /* Texto secundário */
+  --color-blue-zinc: #1f2937; /* Card do PostForm */
+  --color-dark-ocean-blue: #111827; /* Inputs do PostForm */
+  --color-light-blue-zinc: #414958; /* Background páginas Login/Cadastro/Posts */
 }
-
-/* 
-  Como usar estas cores no código:
-  - bg-main-color-zinc     → background cinza
-  - bg-dark-blue-color     → background azul escuro  
-  - bg-main-orange-color   → background laranja
-  - text-main-orange-color → texto laranja
-  - border-dark-blue-color → borda azul escura
-*/

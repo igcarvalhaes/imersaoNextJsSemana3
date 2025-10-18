@@ -72,14 +72,17 @@ export default function PostForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-10 pt-20">
-      <div className="flex flex-col items-center gap-5 justify-center md:gap-28 md:justify-center md:flex-row">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full px-4 flex flex-col items-center pt-10 md:pt-20"
+    >
+      <div className="flex flex-col w-full max-w-md gap-4 p-4 bg-blue-zinc rounded-lg md:max-w-[627px] md:gap-5 md:p-6 md:h-[300px]">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           id="title"
-          className="bg-white rounded-md w-80 h-12 outline-main-orange-color pl-6"
+          className="bg-dark-ocean-blue text-white rounded-md w-full h-12 outline-white pl-4 text-sm md:pl-6 md:text-base placeholder:text-gray-400"
           placeholder="Título do post"
           required
         />
@@ -87,16 +90,16 @@ export default function PostForm() {
           value={body}
           onChange={(e) => setBody(e.target.value)}
           id="body"
-          className="bg-white rounded-md w-80 h-12 outline-main-orange-color pl-6 resize-none pt-3"
+          className="bg-dark-ocean-blue text-white rounded-md w-full h-32 outline-white pl-4 pt-3 resize-none text-sm md:pl-6 md:h-40 md:text-base placeholder:text-gray-400  break-words overflow-y-auto"
           placeholder="Conteúdo do post"
           required
         />
         <button
           type="submit"
           disabled={submitting}
-          className="h-12 w-80 md:w-60 bg-main-orange-color text-white rounded-md hover:bg-orange-600 transition-colors hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="self-end h-10 w-full text-sm font-semibold bg-main-orange-color text-white rounded-md hover:bg-orange-600 hover:cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed md:h-12 md:w-28"
         >
-          {submitting ? "Postando..." : "Postar"}
+          {submitting ? "Publicando..." : "Publicar"}
         </button>
       </div>
     </form>

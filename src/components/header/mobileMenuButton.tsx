@@ -24,7 +24,7 @@ export function MobileMenuButton({ children }: MobileMenuButtonProps) {
 
       {/* Menu mobile */}
       {isOpen && (
-        <div className="absolute top-24 left-0 w-full bg-dark-blue-color z-50 md:hidden">
+        <div className="absolute top-24 left-0 w-full bg-dark-gray-blue z-50 md:hidden">
           {children}
         </div>
       )}

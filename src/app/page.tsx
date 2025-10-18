@@ -1,37 +1,31 @@
-import Image from "next/image"; // Componente otimizado para imagens
+import Image from "next/image";
+import Link from "next/link";
 
-// Página inicial - rota "/"
 export default function Home() {
   return (
     // Container principal - centraliza vertical e horizontalmente
-    <div className="flex flex-col items-center justify-center flex-1">
-      {/* Card principal com cores customizadas */}
-      <div className="h-[26rem] w-[20rem] md:w-[44rem] bg-main-orange-color flex flex-col items-center rounded-4xl">
-        {/* Header do card - cor azul escura */}
-        <div className="h-20 bg-dark-blue-color w-full flex items-center justify-center rounded-t-4xl">
-          <h2 className="text-white text-3xl">Imersão NextJs</h2>
-        </div>
+    <div className="flex flex-col items-center justify-center flex-1 bg-dark-gray-blue-zinc px-4">
+      <div className="flex flex-col items-center w-full max-w-[1112px] gap-6 md:gap-12 md:h-[415px]">
+        {/* Título - Mobile: text-4xl, Desktop: text-7xl */}
+        <h1 className="text-4xl md:text-7xl text-center font-bold text-white">
+          Imersão <span className="text-main-orange-color">Next.js</span>: Do
+          Zero ao Deploy
+        </h1>
 
-        {/* Área do conteúdo - responsiva: coluna em mobile, linha em tablet+ */}
-        <div className="flex-1 flex flex-col md:flex-row items-center justify-evenly w-full gap-4 md:gap-0">
-          {/* Logo Next.js 1 - tamanho responsivo */}
-          <Image
-            src="/images/logos/nextjslogo.png" // Caminho público
-            alt="logo do nextjs"
-            width={288} // Largura desktop
-            height={174} // Altura desktop
-            className="w-48 h-28 md:w-72 md:h-44" // Responsive: menor em mobile
-          />
+        {/* Parágrafo - Mobile: text-lg, Desktop: text-3xl */}
+        <p className="text-lg md:text-3xl text-center text-light-gray">
+          Aprenda a construir aplicações web modernas com Next.js, do conceito
+          inicial à implantação final. Domine as melhores práticas e as
+          ferramentas essenciais para o desenvolvimento front-end.
+        </p>
 
-          {/* Logo Next.js 2 - formato quadrado responsivo */}
-          <Image
-            src="/images/logos/nextjslogo2.png"
-            alt="logo do nextjs"
-            width={225} // Largura desktop
-            height={225} // Altura desktop
-            className="w-32 h-32 md:w-56 md:h-56" // Responsive: menor em mobile
-          />
-        </div>
+        {/* Botão - Mobile: w-full, Desktop: w-70 */}
+        <Link
+          href="/cadastro"
+          className="inline-flex items-center justify-center w-full md:w-70 h-12 md:h-14 bg-main-orange-color text-white text-sm md:text-[15px] font-semibold rounded-md hover:bg-bright-orange-color transition-colors"
+        >
+          Comece a aprender
+        </Link>
       </div>
     </div>
   );

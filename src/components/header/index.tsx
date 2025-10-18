@@ -8,7 +8,10 @@ export function Header() {
       <nav className="h-full flex items-center justify-between mx-5 md:mx-8">
         {/* 1. Logo - Esquerda */}
         <div className="text-2xl font-bold flex-shrink-0">
-          <Link href="/" className="hover:text-main-orange-color">
+          <Link
+            href="/"
+            className="hidden md:flex hover:text-main-orange-color"
+          >
             Imersão Next.js
           </Link>
         </div>

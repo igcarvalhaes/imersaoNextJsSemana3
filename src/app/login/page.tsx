@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="grid md:grid-cols-2 items-center max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 [box-shadow:0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
+    <div className="min-h-screen bg-light-blue-zinc flex flex-col items-center justify-center p-4">
+      <div className="grid bg-white md:grid-cols-2 items-center max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 [box-shadow:0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
         <div className="md:max-w-md w-full px-4 py-4">
           <LoginForm />
         </div>
