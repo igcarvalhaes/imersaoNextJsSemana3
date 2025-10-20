@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
@@ -19,6 +20,7 @@ export async function GET() {
         },
       },
     });
+    revalidatePath("/posts");
     return NextResponse.json(posts);
   } catch (error) {
     console.error("Erro ao buscar posts:", error);
@@ -63,6 +65,9 @@ export async function POST(request: Request) {
         },
       },
     });
+
+    // Revalidar cache da pagina /posts
+    revalidatePath("/posts");
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
@@ -116,6 +121,9 @@ export async function DELETE(request: Request) {
     await prisma.post.delete({
       where: { id: Number(id) },
     });
+
+    // revalidar cache da pagina /posts
+    revalidatePath("/posts");
 
     return NextResponse.json({ message: "Post deletado com sucesso" });
   } catch (error) {
