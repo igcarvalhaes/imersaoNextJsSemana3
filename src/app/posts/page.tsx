@@ -28,10 +28,12 @@ export default async function Posts() {
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-2">
+                  <h2 className="text-xl font-bold text-gray-900 mb-2 break-words">
                     {post.title}
                   </h2>
-                  <p className="text-gray-700 leading-relaxed">{post.body}</p>
+                  <p className="text-gray-700 leading-relaxed break-words">
+                    {post.body}
+                  </p>
                 </div>
 
                 <div className="pt-2 border-t border-gray-200">
