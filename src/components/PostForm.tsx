@@ -1,16 +1,15 @@
 // src/components/PostForm.tsx
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { createPost, deletePost } from "@/app/posts/actions";
+import { useState, useTransition } from "react";
 import { useSession } from "next-auth/react";
 
 export default function PostForm() {
   const { data: session, status } = useSession();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   // Se não estiver carregado
   if (status === "loading") {
@@ -40,35 +39,16 @@ export default function PostForm() {
       return;
     }
 
-    setSubmitting(true);
-
-    try {
-      const response = await fetch("/api/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: session?.user?.id, // ✅ Usa o ID do usuário logado
-          title,
-          body,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Erro ao criar o post.");
+    startTransition(async () => {
+      try {
+        await createPost(title, body);
+        setTitle("");
+        setBody("");
+      } catch (error) {
+        console.error("Erro ao criar post:", error);
+        alert(error instanceof Error ? error.message : "Erro ao criar o post");
       }
-
-      setTitle("");
-      setBody("");
-      router.refresh();
-      alert("Post criado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao criar post:", error);
-      alert("Erro ao criar o post. Tente novamente.");
-    } finally {
-      setSubmitting(false);
-    }
+    });
   };
 
   return (
@@ -85,6 +65,7 @@ export default function PostForm() {
           className="bg-dark-ocean-blue text-white rounded-md w-full h-12 outline-white pl-4 text-sm md:pl-6 md:text-base placeholder:text-gray-400"
           placeholder="Título do post"
           required
+          disabled={isPending}
         />
         <textarea
           value={body}
@@ -93,13 +74,14 @@ export default function PostForm() {
           className="bg-dark-ocean-blue text-white rounded-md w-full h-32 outline-white pl-4 pt-3 resize-none text-sm md:pl-6 md:h-40 md:text-base placeholder:text-gray-400  break-words overflow-y-auto"
           placeholder="Conteúdo do post"
           required
+          disabled={isPending}
         />
         <button
           type="submit"
-          disabled={submitting}
+          disabled={isPending}
           className="self-end h-10 w-full text-sm font-semibold bg-main-orange-color text-white rounded-md hover:bg-orange-600 hover:cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed md:h-12 md:w-28"
         >
-          {submitting ? "Publicando..." : "Publicar"}
+          {isPending ? "Publicando..." : "Publicar"}
         </button>
       </div>
     </form>

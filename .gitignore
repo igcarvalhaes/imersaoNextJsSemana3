@@ -49,3 +49,8 @@ next-env.d.ts
 prisma/*.db
 prisma/*.db-journal
 prisma/dev.db
+
+# mds de explicacao
+DESAFIO_SEMANA_3.md
+GUIA_PRATICO_SEMANA3.md
+SEMANA3_AUTENTICACAO_NEXTAUTH.md
